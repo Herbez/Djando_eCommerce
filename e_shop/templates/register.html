@@ -14,39 +14,35 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title">Create new account</h4>
-								<form>
-			
+								<form method="POST" action="{% url 'register' %}">
+									
 									<div class="form-group">
-										<label for="name">Name</label>
-										<input type="text" class="form-control" id="name" name="name" required="" autofocus="">
+										<label for="email">Username </label>
+										<input id="username" type="username" class="form-control" name="username" required="">
 									</div>
 
 									<div class="form-group">
-										<label for="email">E-Mail Address</label>
-										<input id="email" type="email" class="form-control" name="email" required="">
+										<label for="email">Email</label>
+										<input type="email" class="form-control" id="email" name="email" required="" >
+										
 									</div>
 
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group">
 											<label for="password">Password
 											</label>
 											<input id="password" type="password" class="form-control" name="password" required="">
-										</div>
-										<div class="form-group col-md-6">
-											<label for="password-confirm">Confirm Password
-											</label>
-											<input id="password-confirm" type="password2" class="form-control" name="password_confirmation" required="">
 										</div>
 									</div>
 
 
 									<div class="form-group no-margin">
-										<a href="/index.html" class="btn btn-primary btn-block">
+										<button type="submit" class="btn btn-primary btn-block">
 											Sign Up
-										</a>
+										</button>
 									</div>
 									<div class="text-center mt-3 small">
-										Already have an account? <a href="#">Sign In</a>
+										Already have an account? <a href="{% url 'register' %}">LogIn</a>
 									</div>
 								</form>
 							</div>
