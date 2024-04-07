@@ -14,14 +14,32 @@ from django.contrib.auth import login as auth_login
 
 products = Product.objects.all()
 def index(request):
-    return render(request, 'index.html',
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
+        return render(request, 'index.html',
+        {'username': username, 'products':products})
+    else:
+        return render(request, 'index.html',
                   {'products':products})
 
 def about(request):
-    return render(request, 'about.html', {})
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
+        return render(request, 'about.html',
+        {'username': username})
+    else:
+        return render(request, 'about.html', {})
 
 def contact(request):
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
+        return render(request, 'contact.html',
+        {'username': username})
     return render(request, 'contact.html', {})
+
 
 def login_user(request):
     
