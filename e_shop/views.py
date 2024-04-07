@@ -23,6 +23,10 @@ def index(request):
         return render(request, 'index.html',
                   {'products':products})
 
+def product(request,pk):
+	product = Product.objects.get(id=pk)
+	return render(request, 'product.html', {'product':product})
+
 def about(request):
     username = None
     if request.user.is_authenticated:
