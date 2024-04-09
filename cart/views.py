@@ -7,7 +7,15 @@ from django.contrib import messages
 # Create your views here.
 
 def cart_summary(request):
-    return render(request, 'cart_summary.html',{})
+    cart = Cart(request)
+    cart_products = cart.get_prods
+    username = None 	
+    if request.user.is_authenticated:
+        username = request.user.username
+        return render(request, 'cart_page.html',
+        {'username': username, "cart_products":cart_products})
+    else:
+        return render(request, 'cart_page.html')
     
 def cart_add(request):
 	# Get the cart
@@ -16,20 +24,19 @@ def cart_add(request):
 	if request.POST.get('action') == 'post':
 		# Get stuff
 		product_id = int(request.POST.get('product_id'))
-		product_qty = int(request.POST.get('product_qty'))
 
 		# lookup product in DB
 		product = get_object_or_404(Product, id=product_id)
 		
 		# Save to session
-		cart.add(product=product, quantity=product_qty)
+		cart.add(product=product)
 
 		# Get Cart Quantity
 		cart_quantity = cart.__len__()
 
 		# Return resonse
-		# response = JsonResponse({'Product Name: ': product.name})
-		response = JsonResponse({'qty': cart_quantity})
+		response = JsonResponse({'Product Name: ': product.name})
+
 		
 		return response
       

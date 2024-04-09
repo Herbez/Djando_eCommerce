@@ -57,8 +57,8 @@ def login_user(request):
             return redirect('index')
 
         else:
-            messages.success(request, ("Incorrect password or username! "))
-            return redirect('login')
+            messages.success(request, "Incorrect password or username")
+            return render(request, 'login.html', {})
     
     else:
         return render(request, 'login.html', {})
